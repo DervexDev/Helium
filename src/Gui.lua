@@ -1,5 +1,6 @@
 local TweenService = game:GetService('TweenService')
 
+local Theme = require(script.Parent.Theme)
 local Config = require(script.Parent.Config)
 local Camera = require(script.Parent.Camera)
 local Keybinds = require(script.Parent.Keybinds)
@@ -19,6 +20,8 @@ Keybinds.callback = function(slot)
 end
 
 function Gui.open()
+    Theme.update(true)
+
     if Config.keybindsEnabled then
         keybindsButton.OnIcon.ImageTransparency = 0
     else
@@ -73,6 +76,8 @@ function Gui.close()
             v.Visible = false
         end
     end
+
+    Theme.update()
 end
 
 return Gui
