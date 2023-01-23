@@ -1,5 +1,6 @@
 local ContextActionService = game:GetService('ContextActionService')
 local UserInputService = game:GetService('UserInputService')
+local RunService = game:GetService('RunService')
 
 local Config = require(script.Parent.Config)
 local Camera = require(script.Parent.Camera)
@@ -32,11 +33,15 @@ local function handleInput(_, state, input)
 end
 
 function Keybinds.bind()
-    ContextActionService:BindAction('Helium', handleInput, false, unpack(SLOT_KEYS))
+    if RunService:IsEdit() then
+        ContextActionService:BindAction('Helium', handleInput, false, unpack(SLOT_KEYS))
+    end
 end
 
 function Keybinds.unbind()
-    ContextActionService:UnbindAction('Helium')
+    if RunService:IsEdit() then
+        ContextActionService:UnbindAction('Helium')
+    end
 end
 
 Keybinds.callback = nil
