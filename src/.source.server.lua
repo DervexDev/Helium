@@ -5,7 +5,22 @@ local Toolbar = require(script.Toolbar)
 
 local widgetInfo = DockWidgetPluginGuiInfo.new(Enum.InitialDockState.Float, false, false, 300, 250, 300, 130)
 local widget = plugin:CreateDockWidgetPluginGui('Helium', widgetInfo)
-local button = Toolbar('Helium', plugin)
+local connection = nil
+
+button = Toolbar(plugin, 'Helium', 'rbxassetid://12243614008', function(newButton)
+    button = newButton
+
+    if Config.isOpen then
+        button:SetActive(true)
+    end
+
+    if connection then
+        connection:Disconnect()
+        connection = nil
+    end
+
+    connection = button.Click:Connect(openClose)
+end)
 
 widget.Name = 'Helium'
 widget.Title = 'Helium'
@@ -32,14 +47,15 @@ local function close()
     end
 end
 
-button.Click:Connect(function()
+function openClose()
     if Config.isOpen then
         close()
     else
         open()
     end
-end)
+end
 
+connection = button.Click:Connect(openClose)
 widget.WindowFocused:Connect(open)
 widget:BindToClose(close)
 
