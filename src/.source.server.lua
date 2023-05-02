@@ -7,7 +7,7 @@ local widgetInfo = DockWidgetPluginGuiInfo.new(Enum.InitialDockState.Float, fals
 local widget = plugin:CreateDockWidgetPluginGui('Helium', widgetInfo)
 local connection = nil
 
-button = Toolbar(plugin, 'Helium', 'rbxassetid://12243614008', function(newButton)
+button = Toolbar(plugin, 'Helium', 'rbxassetid://12243614008', 1, function(newButton)
     button = newButton
 
     if Config.isOpen then
